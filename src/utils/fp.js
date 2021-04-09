@@ -36,7 +36,7 @@ export function isEmpty(mixedVar) {
 
     if (typeof mixedVar === 'object') {
         for (let key in mixedVar) {
-            if (mixedVar.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(mixedVar, key)) {
                 return false;
             }
         }
@@ -84,7 +84,7 @@ export function typeOf(mixedVar) {
  * @return {string}
  */
 export function toString(mixedVar) {
-    if (typeOf(mixedVar) === 'error' && mixedVar.hasOwnProperty('message'))
+    if (typeOf(mixedVar) === 'error' && Object.prototype.hasOwnProperty.call(mixedVar, 'message'))
         return mixedVar.message;
     return _toString(mixedVar);
 }

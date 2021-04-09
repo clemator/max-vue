@@ -1,4 +1,5 @@
-import { CELL, RESOURCE } from '@/utils/constants/index';
+import CELL from '@/utils/constants/cell';
+import RESOURCE from '@/utils/constants/resource';
 import { filter, flatten, isEmpty } from '@/utils/fp';
 import cache from '@/storage/cache';
 
@@ -40,30 +41,33 @@ const actions = {
      * @param {Number} gridOptions.mineralRatio grid mineral ratio
      * @param {Number} gridOptions.fuelRatio grid fuel ratio
      * @param {Number} gridOptions.goldRatio grid gold ratio
-     * @param {String} gridOptions.defaultCellStatus the cells default status
-     * @param {String} gridOptions.defaultCellOwner the cells default owner
-     * @param {String} gridOptions.defaultCellModule the cells default module
+     * @param {String} gridOptions.status the cells status
+     * @param {String} gridOptions.owner the cells owner
+     * @param {String} gridOptions.module the cells module
      */
     initializeGrid({ commit }, gridOptions) {
         const {
             height,
             width,
-            defaultCellStatus,
-            defaultCellOwner,
-            defaultCellModule,
+            status,
+            owner,
+            module,
             mineralRatio,
             fuelRatio,
-            goldRatio
+            goldRatio,
         } = gridOptions;
+        const cellDefaultStatus = CELL.STATUS.HIDDEN;
+        const cellDefaultOwner = '';
+        const cellDefaultModule = CELL.MODULE.NONE;
+        const matrixArrayCell = {
+            status: status || cellDefaultStatus,
+            owner: owner || cellDefaultOwner,
+            module: module || cellDefaultModule,
+            resourceName: RESOURCE.NAME.NONE,
+            resourceQuantity: 0,
+        };
         let matrix = [];
         let matrixArray = [];
-        const matrixArrayCell = {
-            status: defaultCellStatus,
-            owner: defaultCellOwner,
-            module: defaultCellModule,
-            resourceName: RESOURCE.NAME.NONE,
-            resourceQuantity: 0
-        };
 
         commit('setGridSize', { height, width });
 
