@@ -2,18 +2,21 @@
     <div class="max-vue-layout">
         <TopToolbar />
         <MatrixDisplay />
+        <DebugTools />
     </div>
 </template>
 
 <script>
 import TopToolbar from '@/components/TopToolbar';
 import MatrixDisplay from '@/components/matrix/MatrixDisplay';
+import DebugTools from '@/components/matrix/DebugTools';
 import CELL from '@/utils/constants/cell';
 import RESOURCE from '@/utils/constants/resource';
 
 export default {
     name: 'MaxVueLayout',
     components: {
+        DebugTools,
         MatrixDisplay,
         TopToolbar,
     },

@@ -5,7 +5,7 @@ const RESOURCE = {
         FUEL: 'fuel',
         GOLD: 'gold',
     },
-    MAXIMUM_PER_CELL: 18,
+    MAXIMUM_PER_CELL: 16,
     MINIMUM_PER_CELL: 1,
     RATIO: {
         MINERAL: 0.4,

@@ -10,10 +10,19 @@ const state = {
 };
 
 const getters = {
-    modifiedMatrixCells: state => {
-        return filter(cell => cell.status !== CELL.STATUS.DEFAULT, flatten(state.gridMatrix));
+    modifiedMatrixCells: (state) => {
+        return filter(
+            (cell) => cell.status !== CELL.STATUS.HIDDEN,
+            flatten(state.gridMatrix)
+        );
     },
-    getCell: state => ({ X, Y }) => state.gridMatrix[Y][X],
+    unmodifiedMatrixCells: (state) => {
+        return filter(
+            (cell) => cell.status === CELL.STATUS.HIDDEN,
+            flatten(state.gridMatrix)
+        );
+    },
+    getCell: (state) => ({ X, Y }) => state.gridMatrix[Y][X],
 };
 
 const actions = {
@@ -99,6 +108,11 @@ const actions = {
         commit('setGridContent', []);
         commit('setGridSize', {});
         await cache.set('GRID', 'CELLS', undefined);
+    },
+    unveilMap({ commit, getters }) {
+        getters.unmodifiedMatrixCells.forEach(
+            (cell) => commit('mutateCellData', { ...cell, status: CELL.STATUS.DEFAULT })
+        );
     }
 };
 
