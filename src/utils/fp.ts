@@ -27,7 +27,7 @@ import {
  * @param {*} mixedVar
  * @return {boolean}
  */
-export function isEmpty(mixedVar) {
+export function isEmpty(mixedVar: any) {
     const emptyValues = [undefined, null, false, 0, ''];
 
     for (let i = 0; i < emptyValues.length; i++)
@@ -59,7 +59,7 @@ export function isEmpty(mixedVar) {
  * @param {*} mixedVar
  * @return {*} 
  */
-export function fromJSON(mixedVar) {
+export function fromJSON(mixedVar: any) {
     try {
         return JSON.parse(mixedVar);
     } catch (e) {
@@ -73,7 +73,7 @@ export function fromJSON(mixedVar) {
  * @param {*} mixedVar
  * @return {string}
  */
-export function typeOf(mixedVar) {
+export function typeOf(mixedVar: any) {
     var s = Object.prototype.toString.call(mixedVar);
     return s.slice(8, s.length - 1).toLowerCase();
 }
@@ -83,7 +83,7 @@ export function typeOf(mixedVar) {
  * @param {*} mixedVar
  * @return {string}
  */
-export function toString(mixedVar) {
+export function toString(mixedVar: any) {
     if (typeOf(mixedVar) === 'error' && Object.prototype.hasOwnProperty.call(mixedVar, 'message'))
         return mixedVar.message;
     return _toString(mixedVar);

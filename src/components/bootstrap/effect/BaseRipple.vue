@@ -2,20 +2,22 @@
   <div
     :class="[
       'base-ripple',
-    {
-      'base-ripple--fluid': fluid,
-      'base-ripple--spread': spread,
-      'base-ripple--disabled': disabled
-    }]"
+      {
+        'base-ripple--fluid': fluid,
+        'base-ripple--spread': spread,
+        'base-ripple--disabled': disabled,
+      },
+    ]"
   >
-    <slot/>
+    <slot />
     <div
       :class="[
         'rippleJS',
         'base-ripple__inner',
-      {
-        'fill': spread
-      }]"
+        {
+          fill: spread,
+        },
+      ]"
     />
   </div>
 </template>
@@ -32,15 +34,15 @@
  *  @link https://github.com/greyby/vue-spinner
  */
 export default {
-  name: 'BaseRipple',
+  name: "BaseRipple",
   props: {
     fluid: {
       type: Boolean,
-      default: false
+      default: false,
     },
     spread: {
       type: Boolean,
-      default: false
+      default: false,
     },
     disabled: {
       type: Boolean,
@@ -48,10 +50,10 @@ export default {
     },
     color: {
       type: String,
-      required: false
-    }
-  }
-}
+      required: false,
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -60,14 +62,21 @@ export default {
 
   position: relative;
   // Default opacity
-  &__inner { opacity: 0.4; }
+  &__inner {
+    opacity: 0.4;
+  }
   // Helper class allowing ripple effect to be applied
   // within the whole surface of the inner element
-  &--fluid { height: 100%; width: 100%; display: block; }
+  &--fluid {
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
 
   &--disabled {
-
-    #{ $self }__inner { visibility: hidden; }
+    #{ $self }__inner {
+      visibility: hidden;
+    }
   }
 }
 </style>

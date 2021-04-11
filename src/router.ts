@@ -1,4 +1,6 @@
-const AsyncComponentBuilder = (folder, path) => {
+import { Route } from 'vue-router';
+
+const AsyncComponentBuilder = (folder: string, path: string) => {
     if (folder === 'layouts') {
         return () => import(
             /* webpackMode: "lazy" */
@@ -31,7 +33,7 @@ export const routes = [
  * @param {Object} from - the route transitioning from
  * @param {Function} next - the function to call to resolve the hook
  */
-export function globalBeforeGuard(to, from, next) {
+export function globalBeforeGuard(to: Route, from: Route, next: any) {
     if (to.matched.length === 0)
         next('not-found');
     else

@@ -2,11 +2,12 @@
   <button
     :class="[
       'base-button',
-    {
-      'base-button--primary': variant === 'primary',
-      'base-button--disabled': status === 'disabled',
-      'base-button--waiting': status === 'waiting',
-    }]"
+      {
+        'base-button--primary': variant === 'primary',
+        'base-button--disabled': status === 'disabled',
+        'base-button--waiting': status === 'waiting',
+      },
+    ]"
     :disabled="status === 'disabled'"
     :type="type"
     v-on="onEvent()"
@@ -29,45 +30,44 @@
 </template>
 
 <script>
-import BaseSpinner from '@/components/bootstrap/effect/BaseSpinner';
-import BaseRipple from '@/components/bootstrap/effect/BaseRipple';
+import BaseSpinner from "@/components/bootstrap/effect/BaseSpinner.vue";
+import BaseRipple from "@/components/bootstrap/effect/BaseRipple.vue";
 
 export default {
-  name: 'BaseButton',
+  name: "BaseButton",
   components: {
     BaseSpinner,
-    BaseRipple
+    BaseRipple,
   },
   props: {
     status: {
       type: String,
       required: false,
-      default: 'default'
+      default: "default",
     },
     type: {
       type: String,
       required: false,
-      default: 'button'
+      default: "button",
     },
     variant: {
       type: String,
       required: false,
-      default: 'primary'
-    }
+      default: "primary",
+    },
   },
   methods: {
     onEvent() {
       return {
         ...this.$listeners,
-        click: this.onClick
-      }
+        click: this.onClick,
+      };
     },
     onClick() {
-      if (this.status !== 'disabled')
-        return this.$emit('click')
-    }
-  }
-}  
+      if (this.status !== "disabled") return this.$emit("click");
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -78,7 +78,7 @@ export default {
   font-size: 15px;
   font-weight: bold;
   text-align: center;
-  color: #FFF;
+  color: #fff;
   border-radius: 6px;
   transition: background-color 0.2s;
   min-height: 25px;
@@ -92,7 +92,8 @@ export default {
   &--primary {
     background-color: $primaryGreen;
 
-    &:not([disabled]):hover, &:not([disabled]):focus {
+    &:not([disabled]):hover,
+    &:not([disabled]):focus {
       background-color: rgba(76, 175, 80, 0.85);
     }
 

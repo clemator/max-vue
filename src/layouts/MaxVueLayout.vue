@@ -10,8 +10,8 @@
 import TopToolbar from '@/components/TopToolbar';
 import MatrixDisplay from '@/components/matrix/MatrixDisplay';
 import DebugTools from '@/components/matrix/DebugTools';
-import CELL from '@/utils/constants/cell';
 import RESOURCE from '@/utils/constants/resource';
+import { CELL_STATUS } from '@/utils/enums/cell.ts';
 
 export default {
     name: 'MaxVueLayout',
@@ -25,7 +25,7 @@ export default {
             gridOptions: {
                 height: 25,
                 width: 25,
-                status: CELL.STATUS.HIDDEN,
+                status: CELL_STATUS.HIDDEN,
                 mineralRatio: RESOURCE.RATIO.MINERAL,
                 fuelRatio: RESOURCE.RATIO.FUEL,
                 goldRatio: RESOURCE.RATIO.GOLD,

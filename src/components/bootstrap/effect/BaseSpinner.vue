@@ -10,26 +10,23 @@
  *
  *  @link https://github.com/greyby/vue-spinner
  */
-import PulseLoader from 'vue-spinner/src/PulseLoader'
+import PulseLoader from "vue-spinner/src/PulseLoader";
 
 export default {
-  name: 'BaseSpinner',
-  components: {
-    PulseLoader,
-  }
-}
+    name: "BaseSpinner",
+    components: {
+        PulseLoader,
+    },
+};
 </script>
 
 <template>
-  <pulse-loader
-    v-bind="$attrs"
-    class="base-spinner"
-  />
+    <pulse-loader v-bind="$attrs" class="base-spinner" />
 </template>
 
 <style lang="scss">
 .base-spinner {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 </style>

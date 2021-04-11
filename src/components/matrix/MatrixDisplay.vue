@@ -21,13 +21,13 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import MatrixCell from '@/components/matrix/MatrixCell';
-import CELL from '@/utils/constants/cell';
+import MatrixCell from '@/components/matrix/cell/MatrixCell.vue';
+import { CELL_STATUS } from '@/utils/enums/cell';
 
 export default {
     name: 'MatrixDisplay',
     components: {
-        MatrixCell
+        MatrixCell,
     },
     computed: {
         ...mapState('board/grid', {
@@ -39,11 +39,11 @@ export default {
             'setCellData',
         ]),
         isCellHidden(cell) {
-            return cell.status === CELL.STATUS.HIDDEN;
+            return cell.status === CELL_STATUS.HIDDEN;
         },
         onCellClick(cell) {
-            if (cell.status === CELL.STATUS.HIDDEN) {
-                this.setCellData({ ...cell, status: CELL.STATUS.DEFAULT});
+            if (cell.status === CELL_STATUS.HIDDEN) {
+                this.setCellData({ ...cell, status: CELL_STATUS.DEFAULT});
             }
         },
     }
