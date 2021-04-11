@@ -11,8 +11,8 @@
             >
                 <MatrixCell
                     :data="cell"
-                    :isCellHidden="cell.status === 'default' ? true : false"
-                    @onCellClick="onCellClick"
+                    :isCellHidden="isCellHidden(cell)"
+                    :onCellClick="onCellClick"
                 />
             </div>
         </div>
@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import MatrixCell from '@/components/matrix/MatrixCell';
-import { CELL } from '@/utils/constants/index';
+import CELL from '@/utils/constants/cell';
 
 export default {
     name: 'MatrixDisplay',
@@ -35,16 +35,17 @@ export default {
         }),
     },
     methods: {
-        /**
-         * On Cell Click
-         * - Handle the cell click interaction
-         * @param {Object} cellData
-         */
-        onCellClick(cellData) {
-            const modifiedCellData = { ...cellData };
-
-            this.$store.dispatch('board/grid/setCellData', modifiedCellData);
-        }
+        ...mapActions('board/grid', [
+            'setCellData',
+        ]),
+        isCellHidden(cell) {
+            return cell.status === CELL.STATUS.HIDDEN;
+        },
+        onCellClick(cell) {
+            if (cell.status === CELL.STATUS.HIDDEN) {
+                this.setCellData({ ...cell, status: CELL.STATUS.DEFAULT});
+            }
+        },
     }
 }
 </script>

@@ -1,43 +1,47 @@
 <template>
     <div
-        :class="['matrix-cell', data.resourceName, {
-            'matrix-cell--hidden': isCellHidden
+        :class="['matrix-cell', {
+            [data.resourceName]: !isCellHidden,
+            'matrix-cell--hidden': isCellHidden,
         }]"
-        @click="$emit('onCellClick', { ...data })"
+        @click="onCellClick({ ...data })"
     >
-        {{ getCellResourceToDisplay }}
+        {{ !isCellHidden ? getCellResourceToDisplay : '' }}
     </div>
 </template>
 
 <script>
-import { RESOURCE } from '@/utils/constants/index';
-
 export default {
     name: 'MatrixCell',
     props: {
         data: {
             type: Object,
-            required: true
+            required: true,
         },
         isCellHidden: {
             type: Boolean,
-            required: true
-        }
+            required: true,
+        },
+        onCellClick: {
+            type: Function,
+            required: true,
+        },
     },
     computed: {
         getCellResourceToDisplay() {
             return this.data.resourceQuantity;
-        }
-    }
+        },
+    },
 }
 </script>
 
 <style lang="scss">
 .matrix-cell {
-    width: 25px;
-    height: 25px;
     border: 1px solid black;
-    cursor: pointer;
+    height: 25px;
+    line-height: 25px;
+    user-select: none;
+    width: 25px;
 
     &.mineral {
         background-color: $mineralColor;
@@ -52,9 +56,8 @@ export default {
     }
 
     &--hidden {
-        background-color: #F0F0F0;
-        border: none;
-        cursor: initial;
+        background-color: $lightGrey;
+        cursor: pointer;
     }
 }
 </style>
