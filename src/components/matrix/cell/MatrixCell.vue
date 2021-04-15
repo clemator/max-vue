@@ -38,10 +38,10 @@ export default {
 <style lang="scss">
 .matrix-cell {
     border: 1px solid black;
-    height: 25px;
-    line-height: 25px;
+    height: $cellSize;
+    line-height: $cellSize;
     user-select: none;
-    width: 25px;
+    width: $cellSize;
 
     &.mineral {
         background-color: $mineralColor;

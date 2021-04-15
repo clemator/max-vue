@@ -11,7 +11,7 @@ import TopToolbar from '@/components/TopToolbar';
 import MatrixDisplay from '@/components/matrix/MatrixDisplay';
 import DebugTools from '@/components/matrix/DebugTools';
 import RESOURCE from '@/utils/constants/resource';
-import { CELL_STATUS } from '@/utils/enums/cell.ts';
+import { CELL_STATUS } from '@/utils/enums/cell';
 
 export default {
     name: 'MaxVueLayout',

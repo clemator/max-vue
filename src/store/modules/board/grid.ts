@@ -90,6 +90,7 @@ const actions: ActionTree<GridState, RootState> = {
             module: module || cellDefaultModule,
             resourceName: RESOURCE_NAME.NONE,
             resourceQuantity: 0,
+            coordinates: { X: 0, Y: 0 },
         };
         let matrix = [];
         let matrixArray = [];
@@ -100,6 +101,8 @@ const actions: ActionTree<GridState, RootState> = {
             matrixArray = [];
             for (let j = 0; j < width; j++) {
                 const resourceTypeRand = Math.random();
+                matrixArrayCell.coordinates.X = j;
+                matrixArrayCell.coordinates.Y = i;
                 matrixArrayCell.resourceName = RESOURCE_NAME.NONE;
                 matrixArrayCell.resourceQuantity = 0;
 
@@ -109,7 +112,7 @@ const actions: ActionTree<GridState, RootState> = {
                         ? RESOURCE_NAME.FUEL : RESOURCE_NAME.MINERAL;
                     matrixArrayCell.resourceQuantity = Math.trunc(Math.random() * RESOURCE.MAXIMUM_PER_CELL) + RESOURCE.MINIMUM_PER_CELL;
                 }
-                matrixArray.push({ ...matrixArrayCell, X: j, Y: i });
+                matrixArray.push({ ...matrixArrayCell });
             }
             matrix.push(matrixArray);
         }
