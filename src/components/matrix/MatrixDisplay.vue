@@ -7,7 +7,7 @@
         >
             <div
                 v-for="cell in line"
-                :key="cell.Y + ',' + cell.X"
+                :key="cell.coordinates.Y + ',' + cell.coordinates.X"
             >
                 <MatrixCell
                     :data="cell"

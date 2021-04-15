@@ -9,9 +9,9 @@ import {
     ActionContext,
     ActionTree,
     GetterTree,
-    Module,
     MutationTree,
 } from 'vuex';
+import Coordinates from '@/components/matrix/type';
 
 export interface GridState {
     height: number;
@@ -112,7 +112,7 @@ const actions: ActionTree<GridState, RootState> = {
                         ? RESOURCE_NAME.FUEL : RESOURCE_NAME.MINERAL;
                     matrixArrayCell.resourceQuantity = Math.trunc(Math.random() * RESOURCE.MAXIMUM_PER_CELL) + RESOURCE.MINIMUM_PER_CELL;
                 }
-                matrixArray.push({ ...matrixArrayCell });
+                matrixArray.push({ ...matrixArrayCell, coordinates: { ...matrixArrayCell.coordinates } });
             }
             matrix.push(matrixArray);
         }
@@ -144,9 +144,10 @@ const mutations: MutationTree<GridState> = {
         state.gridMatrix = matrix;
     },
     mutateCellData(state,
-        { X, Y, status, owner, module }:
-        { X: number; Y: number; status: CELL_STATUS; owner: string; module: CELL_MODULE }
+        { coordinates, status, owner, module }:
+        { coordinates: Coordinates; status: CELL_STATUS; owner: string; module: CELL_MODULE }
     ) {
+        const { X, Y } = coordinates;
         state.gridMatrix[Y][X].status = status;
         state.gridMatrix[Y][X].owner = owner;
         state.gridMatrix[Y][X].module = module;

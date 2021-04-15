@@ -1,4 +1,4 @@
-export default interface COORDINATES {
+export default interface Coordinates {
     X: number,
     Y: number,
 }
