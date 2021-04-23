@@ -10,6 +10,10 @@ import { BUILDING_SIZE, BUILDING_STATUS, BUILDING_TYPE } from '@/utils/enums/bui
 export default {
     name: 'Building',
     props: {
+        coordinates: {
+            type: Array,
+            required: true,
+        },
         owner: {
             type: String,
             required: true,

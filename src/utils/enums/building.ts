@@ -13,3 +13,9 @@ export enum BUILDING_TYPE {
     REFINERY = 'refinery',
     WALL = 'WALL',
 }
+
+export enum BUILDING_ACTION {
+    REFINE = 'refine',
+    PRODUCE = 'produce',
+    NONE = 'none',
+}
