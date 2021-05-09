@@ -6,10 +6,11 @@
             :key="index"
         >
             <div
+                class="matrix-display__cell"
                 v-for="cell in line"
-                :key="cell.coordinates.Y + ',' + cell.coordinates.X"
+                :key="`${cell.coordinates.Y},${cell.coordinates.X}`"
             >
-                <MatrixCell
+                <CellComponent
                     :data="cell"
                     :isCellHidden="isCellHidden(cell)"
                     :onCellClick="onCellClick"
@@ -19,29 +20,30 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import CellComponent from '@/components/cell/Cell.vue';
+import { CELL_STATUS } from '@/components/cell/enums';
+import Cell from '@/components/cell/type';
 import { mapActions, mapState } from 'vuex';
-import MatrixCell from '@/components/matrix/cell/MatrixCell.vue';
-import { CELL_STATUS } from '@/utils/enums/cell';
 
 export default {
     name: 'MatrixDisplay',
     components: {
-        MatrixCell,
+        CellComponent,
     },
     computed: {
         ...mapState('board/grid', {
-            grid: state => state.gridMatrix
+            grid: (state: any): Cell[][] => state.gridMatrix
         }),
     },
     methods: {
         ...mapActions('board/grid', [
             'setCellData',
         ]),
-        isCellHidden(cell) {
+        isCellHidden(cell: Cell) {
             return cell.status === CELL_STATUS.HIDDEN;
         },
-        onCellClick(cell) {
+        onCellClick(cell: Cell) {
             if (cell.status === CELL_STATUS.HIDDEN) {
                 this.setCellData({ ...cell, status: CELL_STATUS.DEFAULT});
             }
@@ -64,6 +66,10 @@ export default {
     &__line {
         display: flex;
         max-width: 100%;
+    }
+
+    &__cell {
+        border: 1px solid black;
     }
 }
 </style>

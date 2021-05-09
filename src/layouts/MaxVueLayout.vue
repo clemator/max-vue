@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import TopToolbar from '@/components/TopToolbar';
-import MatrixDisplay from '@/components/matrix/MatrixDisplay';
+import { CELL_STATUS } from '@/components/cell/enums';
 import DebugTools from '@/components/matrix/DebugTools';
+import MatrixDisplay from '@/components/matrix/MatrixDisplay';
+import TopToolbar from '@/components/TopToolbar';
 import RESOURCE from '@/utils/constants/resource';
-import { CELL_STATUS } from '@/utils/enums/cell';
 
 export default {
     name: 'MaxVueLayout',

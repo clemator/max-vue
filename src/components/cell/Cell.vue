@@ -1,8 +1,8 @@
 <template>
     <div
-        :class="['matrix-cell', {
+        :class="['cell', {
             [data.resourceName]: !isCellHidden,
-            'matrix-cell--hidden': isCellHidden,
+            'cell--hidden': isCellHidden,
         }]"
         @click="onCellClick({ ...data })"
     >
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: 'MatrixCell',
+    name: 'Cell',
     props: {
         data: {
             type: Object,
@@ -36,12 +36,18 @@ export default {
 </script>
 
 <style lang="scss">
-.matrix-cell {
-    border: 1px solid black;
+.cell {
     height: $cellSize;
     line-height: $cellSize;
     user-select: none;
     width: $cellSize;
+
+    &.mineral,
+    &.fuel,
+    &.gold {
+        border-radius: 50%;
+        font-weight: 700;
+    }
 
     &.mineral {
         background-color: $mineralColor;

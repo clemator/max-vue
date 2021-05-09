@@ -4,12 +4,12 @@
     </div>
 </template>
 
-<script>
-import { BUILDING_SIZE, BUILDING_STATUS, BUILDING_TYPE } from '@/utils/enums/building';
+<script lang="ts">
+import { BUILDING_SIZE, BUILDING_STATUS, BUILDING_TYPE } from '@/components/building/enums';
 
 export default {
     name: 'Building',
-    props: {
+    propsData: {
         coordinates: {
             type: Array,
             required: true,

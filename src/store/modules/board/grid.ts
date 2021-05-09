@@ -1,6 +1,6 @@
-import Cell from '@/components/matrix/cell/type';
+import { CELL_MODULE, CELL_STATUS } from '@/components/cell/enums';
+import Cell from '@/components/cell/type';
 import RESOURCE from '@/utils/constants/resource';
-import { CELL_MODULE, CELL_STATUS } from '@/utils/enums/cell';
 import { RESOURCE_NAME } from '@/utils/enums/resource';
 import { filter, flatten, isEmpty } from '@/utils/fp';
 import cache from '@/storage/cache';
