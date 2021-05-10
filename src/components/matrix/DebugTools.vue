@@ -20,9 +20,14 @@ export default {
     name: 'DebugTools',
     computed: {
         ...mapGetters('board/grid', ['getCell']),
-        getFirstCell(): Cell {
-            return this.getCell({ X: 0, Y: 0 });
-        }
+        getCells(): Cell[] {
+            return [
+                this.getCell({ X: 0, Y: 0 }),
+                this.getCell({ X: 0, Y: 1 }),
+                this.getCell({ X: 1, Y: 0 }),
+                this.getCell({ X: 1, Y: 1 }),
+            ];
+        },
     },
     methods: {
         ...mapActions('board/grid', [
@@ -30,7 +35,7 @@ export default {
         ]),
         debugFunction() {
             const building: Building = {
-                cells: [this.getFirstCell],
+                cells: this.getCells,
                 owner: '',
                 size: BUILDING_SIZE.SMALL,
                 status: BUILDING_STATUS.DEFAULT,

@@ -21,6 +21,7 @@ class BuildingManager {
 
     private actionsByType: { [key in BUILDING_ACTION]: (building: Building) => void} = {
         [BUILDING_ACTION.REFINE]: (building) => {
+            console.log(this.getBuildingCellsResources(building));
             return this.getBuildingCellsResources(building);
         },
         [BUILDING_ACTION.PRODUCE]: (building) => {
@@ -35,6 +36,7 @@ class BuildingManager {
             [RESOURCE_NAME.MINERAL]: 0,
             [RESOURCE_NAME.FUEL]: 0,
             [RESOURCE_NAME.GOLD]: 0,
+            [RESOURCE_NAME.NONE]: 0,
         };
 
         return building.cells.reduce((acc: BuildingResources, cell: Cell) => {
