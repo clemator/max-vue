@@ -5,10 +5,11 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'App',
-}
+});
 </script>
 
 <style lang="scss">

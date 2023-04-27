@@ -12,8 +12,9 @@ import MatrixDisplay from '@/components/matrix/MatrixDisplay';
 import DebugTools from '@/components/matrix/DebugTools';
 import CELL from '@/utils/constants/cell';
 import RESOURCE from '@/utils/constants/resource';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'MaxVueLayout',
     components: {
         DebugTools,
@@ -35,7 +36,7 @@ export default {
     created() {
         this.$store.dispatch('board/grid/initializeGrid', this.gridOptions);
     },
-}
+});
 </script>
 
 <style lang="scss">

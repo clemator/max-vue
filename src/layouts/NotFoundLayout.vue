@@ -8,14 +8,15 @@
 <script>
 import TopToolbar from '@/components/TopToolbar';
 import NotFoundComponent from '@/components/NotFoundComponent';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'NotFoundLayout',
     components: {
         TopToolbar,
         NotFoundComponent
     }
-};
+});
 </script>
 
 <style lang="scss">

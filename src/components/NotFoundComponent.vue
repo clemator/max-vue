@@ -30,7 +30,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
     name: 'NotFoundComponent',
     data() {
         return {
@@ -48,7 +50,7 @@ export default {
             }, this.showBackgroundDuration);
         })
     }
-}
+});
 </script>
 
 <style lang="scss">

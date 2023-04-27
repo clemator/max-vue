@@ -11,13 +11,14 @@
  *  @link https://github.com/greyby/vue-spinner
  */
 import PulseLoader from 'vue-spinner/src/PulseLoader'
+import { defineComponent } from 'vue';
 
-export default {
-  name: 'BaseSpinner',
-  components: {
-    PulseLoader,
-  }
-}
+export default defineComponent({
+    name: 'BaseSpinner',
+    components: {
+        PulseLoader,
+    }
+});
 </script>
 
 <template>

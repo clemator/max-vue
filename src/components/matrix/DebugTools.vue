@@ -8,15 +8,16 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'DebugTools',
     methods: {
         ...mapActions('board/grid', [
             'unveilMap'
         ]),
     },
-}
+});
 </script>
 
 <style lang="scss">

@@ -11,7 +11,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
     name: 'MatrixCell',
     props: {
         data: {
@@ -32,7 +34,7 @@ export default {
             return this.data.resourceQuantity;
         },
     },
-}
+});
 </script>
 
 <style lang="scss">

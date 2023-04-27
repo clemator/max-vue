@@ -3,18 +3,15 @@
         <div
             class="matrix-display__line"
             v-for="(line, index) in grid"
-            :key="index"
+            :key="`line-${index}`"
         >
-            <div
+            <MatrixCell
                 v-for="cell in line"
                 :key="cell.Y + ',' + cell.X"
-            >
-                <MatrixCell
-                    :data="cell"
-                    :isCellHidden="isCellHidden(cell)"
-                    :onCellClick="onCellClick"
-                />
-            </div>
+                :data="cell"
+                :isCellHidden="isCellHidden(cell)"
+                :onCellClick="onCellClick"
+            />
         </div>
     </div>
 </template>
@@ -23,8 +20,9 @@
 import { mapActions, mapState } from 'vuex';
 import MatrixCell from '@/components/matrix/MatrixCell';
 import CELL from '@/utils/constants/cell';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'MatrixDisplay',
     components: {
         MatrixCell
@@ -47,7 +45,7 @@ export default {
             }
         },
     }
-}
+});
 </script>
 
 <style lang="scss">
