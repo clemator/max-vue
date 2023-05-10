@@ -29,9 +29,9 @@
     </button>
 </template>
 
-<script>
-import BaseSpinner from '@/components/bootstrap/effect/BaseSpinner';
-import BaseRipple from '@/components/bootstrap/effect/BaseRipple';
+<script lang="ts">
+import BaseSpinner from '@/components/bootstrap/effect/BaseSpinner.vue';
+import BaseRipple from '@/components/bootstrap/effect/BaseRipple.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

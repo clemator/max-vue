@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 /**
  *  Base component proxy for Vanilly Ripple JS effect library
  *  @link https://github.com/samthor/rippleJS

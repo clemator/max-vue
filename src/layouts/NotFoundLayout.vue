@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import TopToolbar from '@/components/TopToolbar';
 import NotFoundComponent from '@/components/NotFoundComponent';
 import { defineComponent } from 'vue';

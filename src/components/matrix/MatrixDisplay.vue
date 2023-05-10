@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { mapActions, mapState } from 'vuex';
 import MatrixCell from '@/components/matrix/MatrixCell';
 import CELL from '@/utils/constants/cell';

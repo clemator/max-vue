@@ -6,7 +6,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import TopToolbar from '@/components/TopToolbar';
 import MatrixDisplay from '@/components/matrix/MatrixDisplay';
 import DebugTools from '@/components/matrix/DebugTools';

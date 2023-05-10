@@ -12,8 +12,18 @@ module.exports = {
                 '@': path.resolve(__dirname, 'src/'),
                 'styles': path.resolve(__dirname, 'src/assets/scss/'),
             },
+            extensions: [".ts"]
         },
-        module: {},
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    include: [],
+                    loader: 'ts-loader',
+                    exclude: /node_modules/,
+                }
+            ],
+        },
         plugins: []
     },
     css: {

@@ -1,11 +1,5 @@
-const AsyncComponentBuilder = (folder, path) => {
-    if (folder === 'layouts') {
-        return () => import(
-            /* webpackMode: "lazy" */
-            /* webpackInclude: /\.vue$/ */
-            `@/layouts/${path}`);
-    }
-};
+import MaxVueLayout from '@/layouts/MaxVueLayout.vue';
+import NotFoundLayout from '@/layouts/NotFoundLayout.vue';
 
 /**
  * The route configuration array
@@ -13,14 +7,14 @@ const AsyncComponentBuilder = (folder, path) => {
 export const routes = [
     {
         path: '/',
-        component: AsyncComponentBuilder('layouts', 'MaxVueLayout.vue'),
+        component: MaxVueLayout,
         name: 'root',
         meta: { requiresAuth: false }
     },
     {
         path: '/not-found',
         name: 'not-found',
-        component: AsyncComponentBuilder('layouts', 'NotFoundLayout.vue'),
+        component: NotFoundLayout,
     }
 ];
 

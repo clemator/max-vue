@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 /**
  *  Base component proxy from "vue-spinner" library
  *    - Only importing the PulseLoader component for now as base one
