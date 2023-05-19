@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import TopToolbar from '@/components/TopToolbar';
-import MatrixDisplay from '@/components/matrix/MatrixDisplay';
-import DebugTools from '@/components/matrix/DebugTools';
+import TopToolbar from '@/components/TopToolbar.vue';
+import MatrixDisplay from '@/components/matrix/MatrixDisplay.vue';
+import DebugTools from '@/components/matrix/DebugTools.vue';
 import CELL from '@/utils/constants/cell';
 import RESOURCE from '@/utils/constants/resource';
 import { defineComponent } from 'vue';

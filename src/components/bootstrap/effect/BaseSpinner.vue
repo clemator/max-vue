@@ -10,7 +10,7 @@
  *
  *  @link https://github.com/greyby/vue-spinner
  */
-import PulseLoader from 'vue-spinner/src/PulseLoader'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import { defineComponent } from 'vue';
 
 export default defineComponent({

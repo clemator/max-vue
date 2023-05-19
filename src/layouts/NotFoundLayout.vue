@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-import TopToolbar from '@/components/TopToolbar';
-import NotFoundComponent from '@/components/NotFoundComponent';
+import TopToolbar from '@/components/TopToolbar.vue';
+import NotFoundComponent from '@/components/NotFoundComponent.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

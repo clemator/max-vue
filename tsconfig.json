@@ -1,11 +1,9 @@
 {
     "compilerOptions": {
-        "allowJs": true
-    },
-    "paths": {
-        "@/*": [
-            "./src/*"
-        ]
+        "allowJs": true,
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     },
     "include": [
         "./src/**/*.ts",

@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { mapActions, mapState } from 'vuex';
-import MatrixCell from '@/components/matrix/MatrixCell';
+import MatrixCell from '@/components/matrix/MatrixCell.vue';
 import CELL from '@/utils/constants/cell';
 import { defineComponent } from 'vue';
 
