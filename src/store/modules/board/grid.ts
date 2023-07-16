@@ -1,6 +1,6 @@
 import CELL from '@/utils/constants/cell';
 import RESOURCE from '@/utils/constants/resource';
-import { filter, flatten, isEmpty } from '@/utils/fp';
+import { _filter, _flatten, isEmpty } from '@/utils/fp';
 import cache from '@/storage/cache';
 
 const state = {
@@ -11,15 +11,15 @@ const state = {
 
 const getters = {
     modifiedMatrixCells: (state) => {
-        return filter(
+        return _filter(
             (cell) => cell.status !== CELL.STATUS.HIDDEN,
-            flatten(state.gridMatrix)
+            _flatten(state.gridMatrix)
         );
     },
     unmodifiedMatrixCells: (state) => {
-        return filter(
+        return _filter(
             (cell) => cell.status === CELL.STATUS.HIDDEN,
-            flatten(state.gridMatrix)
+            _flatten(state.gridMatrix)
         );
     },
     getCell: (state) => ({ X, Y }) => state.gridMatrix[Y][X],

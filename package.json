@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+        "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint"
     },
@@ -26,7 +26,8 @@
         "eslint-plugin-vue": "^6.1.2",
         "sass": "^1.62.1",
         "sass-loader": "^7.1.0",
-        "ts-loader": "~8.2.0"
+        "ts-loader": "~8.2.0",
+        "vue-template-compiler": "^2.7.14"
     },
     "eslintConfig": {
         "root": true,

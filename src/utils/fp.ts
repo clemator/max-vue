@@ -89,4 +89,4 @@ export function toString(mixedVar) {
     return _toString(mixedVar);
 }
 
-export { flatten, filter } from 'ramda';
+export { clone as _clone, flatten as _flatten, filter as _filter } from 'ramda';
