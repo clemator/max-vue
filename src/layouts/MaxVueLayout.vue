@@ -40,7 +40,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@use 'styles/variables/_color' as color;
+
 .max-vue-layout {
-    background-color: $lightGrey;
+    background-color: color.$lightGrey;
 }
 </style>

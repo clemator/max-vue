@@ -49,9 +49,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@use 'styles/variables/_color' as color;
+
 .matrix-display {
     align-items: center;
-    background-color: $lightGrey;
+    background-color: color.$lightGrey;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
