@@ -10,30 +10,18 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { Cell } from '@/models/types/cell.type';
+import { computed } from 'vue';
 
-export default defineComponent({
-    name: 'MatrixCell',
-    props: {
-        data: {
-            type: Object,
-            required: true,
-        },
-        isCellHidden: {
-            type: Boolean,
-            required: true,
-        },
-        onCellClick: {
-            type: Function,
-            required: true,
-        },
-    },
-    computed: {
-        getCellResourceToDisplay() {
-            return this.data.resourceQuantity;
-        },
-    },
+const props = defineProps<{
+    data: Cell,
+    isCellHidden: boolean,
+    onCellClick: (cellData: Cell) => void,
+}>();
+
+const getCellResourceToDisplay = computed(() => {
+    return props.data.resourceQuantity;
 });
 </script>
 

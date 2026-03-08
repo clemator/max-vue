@@ -6,18 +6,10 @@
     </div>
 </template>
 
-<script lang="ts">
-import { mapActions } from 'vuex';
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { useGridStore } from '@/store/useGridStore';
 
-export default defineComponent({
-    name: 'DebugTools',
-    methods: {
-        ...mapActions('board/grid', [
-            'unveilMap'
-        ]),
-    },
-});
+const { unveilMap } = useGridStore();
 </script>
 
 <style lang="scss">

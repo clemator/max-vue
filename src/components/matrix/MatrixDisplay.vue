@@ -16,36 +16,28 @@
     </div>
 </template>
 
-<script lang="ts">
-import { mapActions, mapState } from 'vuex';
+<script lang="ts" setup>
 import MatrixCell from '@/components/matrix/MatrixCell.vue';
-import CELL from '@/utils/constants/cell';
-import { defineComponent } from 'vue';
+import CELL from '@/models/constants/cell';
+import { Cell } from '@/models/types/cell.type';
+import { useGridStore } from '@/store/useGridStore';
+import { computed } from 'vue';
 
-export default defineComponent({
-    name: 'MatrixDisplay',
-    components: {
-        MatrixCell
-    },
-    computed: {
-        ...mapState('board/grid', {
-            grid: state => state.gridMatrix
-        }),
-    },
-    methods: {
-        ...mapActions('board/grid', [
-            'setCellData',
-        ]),
-        isCellHidden(cell) {
-            return cell.status === CELL.STATUS.HIDDEN;
-        },
-        onCellClick(cell) {
-            if (cell.status === CELL.STATUS.HIDDEN) {
-                this.setCellData({ ...cell, status: CELL.STATUS.DEFAULT});
-            }
-        },
-    }
+const gridStore = useGridStore();
+
+const grid = computed(() => {
+    return gridStore.gridMatrix;
 });
+
+const isCellHidden = (cell: Cell) => {
+    return cell.status === CELL.STATUS.HIDDEN;
+};
+
+const onCellClick = (cell: Cell) => {
+    if (cell.status === CELL.STATUS.HIDDEN) {
+        gridStore.setCellData({ ...cell, status: CELL.STATUS.DEFAULT});
+    }
+};
 </script>
 
 <style lang="scss">

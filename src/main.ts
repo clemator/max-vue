@@ -1,12 +1,11 @@
+import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from '@/App.vue';
 import { routes, globalBeforeGuard } from '@/router';
-import store from '@/store/index';
 
+const pinia = createPinia();
 const app = createApp(App);
-
-app.config.productionTip = false;
 
 const AppRouter = createRouter({
   history: createWebHistory('/app/'),
@@ -16,5 +15,6 @@ const AppRouter = createRouter({
 AppRouter.beforeEach(globalBeforeGuard);
 
 app.use(AppRouter);
+app.use(pinia);
 
 app.mount('#app');
