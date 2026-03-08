@@ -1,32 +1,26 @@
 {
     "name": "max-vue",
     "version": "0.1.0",
+    "type": "module",
     "private": true,
     "scripts": {
-        "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "serve": "vite preview",
+        "build": "vite build"
     },
     "dependencies": {
-        "core-js": "^3.10.1",
-        "ramda": "^0.27.1",
-        "vue": "^2.7.14",
-        "vue-router": "3.0.2",
-        "vue-spinner": "^1.0.4",
-        "vuex": "^3.6.2"
+        "core-js": "^3.48.0",
+        "pinia": "^3.0.4",
+        "ramda": "^0.27.2",
+        "vitest": "^2.1.9",
+        "vue": "^3.5.29",
+        "vue-router": "^4.5.0"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "~4.2.0",
-        "@vue/cli-plugin-eslint": "~4.2.0",
-        "@vue/cli-plugin-typescript": "~4.2.0",
-        "@vue/cli-service": "~4.2.0",
-        "babel-eslint": "^10.0.3",
-        "cache-loader": "^4.1.0",
-        "eslint": "^6.7.2",
-        "eslint-plugin-vue": "^6.1.2",
-        "sass": "^1.62.1",
-        "sass-loader": "^7.1.0",
-        "ts-loader": "~8.2.0"
+        "@vitejs/plugin-vue": "^5.2.4",
+        "eslint": "^9.39.4",
+        "eslint-plugin-vue": "^9.33.0",
+        "sass": "^1.97.3",
+        "vue-template-compiler": "^2.7.16"
     },
     "eslintConfig": {
         "root": true,
@@ -37,15 +31,7 @@
             "plugin:vue/essential",
             "eslint:recommended"
         ],
-        "parserOptions": {
-            "parser": "babel-eslint"
-        },
         "rules": {}
-    },
-    "postcss": {
-        "plugins": {
-            "autoprefixer": {}
-        }
     },
     "browserslist": [
         "> 1%",

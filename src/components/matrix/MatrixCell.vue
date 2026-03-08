@@ -10,34 +10,24 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { Cell } from '@/models/types/cell.type';
+import { computed } from 'vue';
 
-export default defineComponent({
-    name: 'MatrixCell',
-    props: {
-        data: {
-            type: Object,
-            required: true,
-        },
-        isCellHidden: {
-            type: Boolean,
-            required: true,
-        },
-        onCellClick: {
-            type: Function,
-            required: true,
-        },
-    },
-    computed: {
-        getCellResourceToDisplay() {
-            return this.data.resourceQuantity;
-        },
-    },
+const props = defineProps<{
+    data: Cell,
+    isCellHidden: boolean,
+    onCellClick: (cellData: Cell) => void,
+}>();
+
+const getCellResourceToDisplay = computed(() => {
+    return props.data.resourceQuantity;
 });
 </script>
 
 <style lang="scss">
+@use 'styles/variables/_color' as color;
+
 .matrix-cell {
     border: 1px solid black;
     height: 25px;
@@ -46,19 +36,19 @@ export default defineComponent({
     width: 25px;
 
     &.mineral {
-        background-color: $mineralColor;
+        background-color: color.$mineralColor;
     }
 
     &.fuel {
-        background-color: $fuelColor;
+        background-color: color.$fuelColor;
     }
 
     &.gold {
-        background-color: $goldColor;
+        background-color: color.$goldColor;
     }
 
     &--hidden {
-        background-color: $lightGrey;
+        background-color: color.$lightGrey;
         cursor: pointer;
     }
 }

@@ -5,18 +5,9 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import TopToolbar from '@/components/TopToolbar.vue';
 import NotFoundComponent from '@/components/NotFoundComponent.vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: 'NotFoundLayout',
-    components: {
-        TopToolbar,
-        NotFoundComponent
-    }
-});
 </script>
 
 <style lang="scss">

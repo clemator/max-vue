@@ -1,21 +1,20 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createPinia } from 'pinia';
+import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 import App from '@/App.vue';
 import { routes, globalBeforeGuard } from '@/router';
-import store from '@/store/index';
 
-Vue.config.productionTip = false;
+const pinia = createPinia();
+const app = createApp(App);
 
-Vue.use(VueRouter);
-
-const router = new VueRouter({
-  routes
+const AppRouter = createRouter({
+  history: createWebHistory('/app/'),
+  routes: routes,
 });
 
-router.beforeEach(globalBeforeGuard);
+AppRouter.beforeEach(globalBeforeGuard);
 
-new Vue({
-  render: h => h(App),
-  store,
-  router
-}).$mount('#app');
+app.use(AppRouter);
+app.use(pinia);
+
+app.mount('#app');

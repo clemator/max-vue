@@ -1,49 +1,52 @@
-import CELL from '@/utils/constants/cell';
-import RESOURCE from '@/utils/constants/resource';
-import { filter, flatten, isEmpty } from '@/utils/fp';
-import cache from '@/storage/cache';
+import CELL from '@/models/constants/cell';
+import RESOURCE from '@/models/constants/resource';
+import { Cell } from '@/models/types/cell.type';
+import { _filter, _flatten } from '@/utils/fp';
+import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
-const state = {
-    height: 100,
-    width: 100,
-    gridMatrix: []
-};
+export const useGridStore = defineStore('useGridStore', () => {
+    const gridHeight = ref(100);
+    const gridWidth = ref(100);
+    const gridMatrix = ref<Array<Cell[]>>([]);
 
-const getters = {
-    modifiedMatrixCells: (state) => {
-        return filter(
+    const getCell = computed(() => {
+        return ({ X, Y }) => {
+            return gridMatrix.value[Y][X];
+        };
+    });
+
+    const modifiedMatrixCells = computed(() => {
+        return _filter(
             (cell) => cell.status !== CELL.STATUS.HIDDEN,
-            flatten(state.gridMatrix)
+            _flatten(gridMatrix.value)
         );
-    },
-    unmodifiedMatrixCells: (state) => {
-        return filter(
+    });
+
+    const unmodifiedMatrixCells = computed(() => {
+        return _filter(
             (cell) => cell.status === CELL.STATUS.HIDDEN,
-            flatten(state.gridMatrix)
+            _flatten(gridMatrix.value)
         );
-    },
-    getCell: (state) => ({ X, Y }) => state.gridMatrix[Y][X],
-};
+    });
 
-const actions = {
-    /**
-     * Set Cache Data
-     *  - Retrieve cached data and hydrate the store
-     * @param {Object} context
-     */
-    async setCacheData({ commit }) {
-        const cells = await cache.get('GRID', 'CELLS');
+    const setGridSize = ({ height, width }) => {
+        gridHeight.value = height;
+        gridWidth.value = width;
+    };
 
-        if (isEmpty(cells))
-            cache.set('GRID', 'CELLS', []);
+    const setGridContent = (matrix) => {
+        gridMatrix.value = matrix;
+    };
 
-        cells.forEach((cell) => {
-            commit('mutateCellData', cell);
-        });
-    },
+    const setCellData = ({ X, Y, status, owner, module }) => {
+        gridMatrix.value[Y][X].status = status;
+        gridMatrix.value[Y][X].owner = owner;
+        gridMatrix.value[Y][X].module = module;
+    };
+
     /**
      * Initialize the grid with given properties
-     * @param {Object} param0 
      * @param {Object} gridOptions the options
      * @param {Number} gridOptions.height grid total height
      * @param {Number} gridOptions.width grid total width
@@ -54,7 +57,7 @@ const actions = {
      * @param {String} gridOptions.owner the cells owner
      * @param {String} gridOptions.module the cells module
      */
-    initializeGrid({ commit }, gridOptions) {
+    const initializeGrid = (gridOptions) => {
         const {
             height,
             width,
@@ -78,7 +81,7 @@ const actions = {
         let matrix = [];
         let matrixArray = [];
 
-        commit('setGridSize', { height, width });
+        setGridSize({ height, width });
 
         for (let i = 0; i < height; i++) {
             matrixArray = [];
@@ -98,43 +101,28 @@ const actions = {
             matrix.push(matrixArray);
         }
 
-        commit('setGridContent', matrix);
-    },
-    async setCellData({ commit, getters }, cell) {
-        commit('mutateCellData', cell);
-        await cache.set('GRID', 'CELLS', getters.modifiedMatrixCells);
-    },
-    async resetGrid({ commit }) {
-        commit('setGridContent', []);
-        commit('setGridSize', {});
-        await cache.set('GRID', 'CELLS', undefined);
-    },
-    unveilMap({ commit, getters }) {
-        getters.unmodifiedMatrixCells.forEach(
-            (cell) => commit('mutateCellData', { ...cell, status: CELL.STATUS.DEFAULT })
+        setGridContent(matrix);
+    };
+
+    const resetGrid = () => {
+        setGridContent([]);
+        setGridSize({ height: 100, width: 100});
+    };
+
+    const unveilMap = () => {
+        unmodifiedMatrixCells.value.forEach(
+            (cell) => setCellData({ ...cell, status: CELL.STATUS.DEFAULT })
         );
-    }
-};
+    };
 
-const mutations = {
-    setGridSize(state, { height, width }) {
-        state.height = height;
-        state.width = width;
-    },
-    setGridContent(state, matrix) {
-        state.gridMatrix = matrix;
-    },
-    mutateCellData(state, { X, Y, status, owner, module }) {
-        state.gridMatrix[Y][X].status = status;
-        state.gridMatrix[Y][X].owner = owner;
-        state.gridMatrix[Y][X].module = module;
-    },
-};
-
-export default {
-    namespaced: true,
-    state,
-    getters,
-    actions,
-    mutations
-};
+    return {
+        getCell,
+        gridMatrix,
+        initializeGrid,
+        resetGrid,
+        setCellData,
+        setGridContent,
+        setGridSize,
+        unveilMap,
+    };
+});

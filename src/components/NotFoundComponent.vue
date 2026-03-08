@@ -29,27 +29,21 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { nextTick, onMounted, ref } from 'vue';
 
-export default defineComponent({
-    name: 'NotFoundComponent',
-    data() {
-        return {
-            showBackground: false,
-            showBackgroundDuration: 750,
-            showContent: false,
-            showContentDuration: 750
-        }
-    },
-    created() {
-        this.$nextTick(() => {
-            this.showBackground = true;
-            setTimeout(() => {
-                this.showContent = true;
-            }, this.showBackgroundDuration);
-        })
-    }
+const showBackground = ref(false);
+const showBackgroundDuration = 750;
+const showContent = ref(false);
+const showContentDuration = 750;
+
+onMounted(() => {
+    nextTick(() => {
+        showBackground.value = true;
+        setTimeout(() => {
+            showContent.value = true;
+        }, showBackgroundDuration);
+    });
 });
 </script>
 

@@ -13,14 +13,6 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'TopToolbar',
-});
-</script>
-
 <style lang="scss">
 .top-toolbar {
   height: 60px;
