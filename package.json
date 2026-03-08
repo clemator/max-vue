@@ -19,8 +19,7 @@
         "@vitejs/plugin-vue": "^5.2.4",
         "eslint": "^9.39.4",
         "eslint-plugin-vue": "^9.33.0",
-        "sass": "^1.97.3",
-        "vue-template-compiler": "^2.7.16"
+        "sass": "^1.97.3"
     },
     "eslintConfig": {
         "root": true,
