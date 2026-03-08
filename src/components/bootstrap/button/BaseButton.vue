@@ -10,7 +10,7 @@
         ]"
         :disabled="status === 'disabled'"
         :type="type"
-        v-on="onEvent()"
+        @click="status !== 'disabled' ? onClick : undefined"
     >
         <base-ripple
             class="base-button__inner"
@@ -29,47 +29,16 @@
     </button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import BaseSpinner from '@/components/bootstrap/effect/BaseSpinner.vue';
 import BaseRipple from '@/components/bootstrap/effect/BaseRipple.vue';
-import { defineComponent } from 'vue';
 
-export default defineComponent({
-    name: 'BaseButton',
-    components: {
-        BaseSpinner,
-        BaseRipple
-    },
-    props: {
-        status: {
-            type: String,
-            required: false,
-            default: 'default'
-        },
-        type: {
-            type: String,
-            required: false,
-            default: 'button'
-        },
-        variant: {
-            type: String,
-            required: false,
-            default: 'primary'
-        }
-    },
-    methods: {
-        onEvent() {
-            return {
-                ...this.$listeners,
-                click: this.onClick
-            }
-        },
-        onClick() {
-            if (this.status !== 'disabled')
-                return this.$emit('click')
-        }
-    }
-});
+const props = defineProps<{
+    onClick: () => void,
+    status: string,
+    type: 'button' | 'reset' | 'submit',
+    variant: string,
+}>();
 </script>
 
 <style lang="scss">

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" setup>
 /**
  *  Base component proxy from "vue-spinner" library
  *    - Only importing the PulseLoader component for now as base one
@@ -11,14 +11,6 @@
  *  @link https://github.com/greyby/vue-spinner
  */
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: 'BaseSpinner',
-    components: {
-        PulseLoader,
-    }
-});
 </script>
 
 <template>

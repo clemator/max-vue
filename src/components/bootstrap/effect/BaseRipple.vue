@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 /**
  *  Base component proxy for Vanilly Ripple JS effect library
  *  @link https://github.com/samthor/rippleJS
@@ -33,29 +33,13 @@
  *
  *  @link https://github.com/greyby/vue-spinner
  */
-import { defineComponent } from 'vue';
 
-export default defineComponent({
-    name: 'BaseRipple',
-    props: {
-        fluid: {
-            type: Boolean,
-            default: false
-        },
-        spread: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        color: {
-            type: String,
-            required: false
-        }
-    }
-});
+const props = defineProps<{
+    fluid: boolean,
+    spread: boolean,
+    disabled: boolean,
+    color: string,
+}>();
 </script>
 
 <style lang="scss">
