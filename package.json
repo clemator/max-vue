@@ -19,7 +19,7 @@
         "@vue/cli-plugin-babel": "~4.2.0",
         "@vue/cli-plugin-eslint": "~4.2.0",
         "@vue/cli-plugin-typescript": "~4.2.0",
-        "@vue/cli-service": "~4.2.0",
+        "@vue/cli-service": "~5.0.9",
         "babel-eslint": "^10.0.3",
         "cache-loader": "^4.1.0",
         "eslint": "^6.7.2",
