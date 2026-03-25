@@ -1,11 +1,13 @@
 import CELL from '@/models/constants/cell';
 import RESOURCE from '@/models/constants/resource';
 import { Cell } from '@/models/types/cell.type';
+import initCell from '@/utils/cellConstructor';
 import { _filter, _flatten } from '@/utils/fp';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 export const useGridStore = defineStore('useGridStore', () => {
+    const MAX_ENTROPY = 10;
     const gridHeight = ref(100);
     const gridWidth = ref(100);
     const gridMatrix = ref<Array<Cell[]>>([]);
@@ -61,23 +63,10 @@ export const useGridStore = defineStore('useGridStore', () => {
         const {
             height,
             width,
-            status,
-            owner,
-            module,
             mineralRatio,
             fuelRatio,
             goldRatio,
         } = gridOptions;
-        const cellDefaultStatus = CELL.STATUS.HIDDEN;
-        const cellDefaultOwner = '';
-        const cellDefaultModule = CELL.MODULE.NONE;
-        const matrixArrayCell = {
-            status: status || cellDefaultStatus,
-            owner: owner || cellDefaultOwner,
-            module: module || cellDefaultModule,
-            resourceName: RESOURCE.NAME.NONE,
-            resourceQuantity: 0,
-        };
         let matrix = [];
         let matrixArray = [];
 
@@ -87,21 +76,63 @@ export const useGridStore = defineStore('useGridStore', () => {
             matrixArray = [];
             for (let j = 0; j < width; j++) {
                 const resourceTypeRand = Math.random();
-                matrixArrayCell.resourceName = RESOURCE.NAME.NONE;
-                matrixArrayCell.resourceQuantity = 0;
+                let resourceName = RESOURCE.NAME.NONE;
+                let resourceQuantity = 0;
 
                 if (resourceTypeRand <= mineralRatio) {
-                    matrixArrayCell.resourceName = resourceTypeRand <= goldRatio
+                    resourceName = resourceTypeRand <= goldRatio
                         ? RESOURCE.NAME.GOLD : resourceTypeRand <= fuelRatio
                         ? RESOURCE.NAME.FUEL : RESOURCE.NAME.MINERAL;
-                    matrixArrayCell.resourceQuantity = Math.trunc(Math.random() * RESOURCE.MAXIMUM_PER_CELL) + RESOURCE.MINIMUM_PER_CELL;
+                    resourceQuantity = Math.trunc(Math.random() * RESOURCE.MAXIMUM_PER_CELL) + RESOURCE.MINIMUM_PER_CELL;
                 }
+                const matrixArrayCell = initCell(j, i, resourceName, resourceQuantity);
                 matrixArray.push({ ...matrixArrayCell, X: j, Y: i });
             }
             matrix.push(matrixArray);
         }
 
         setGridContent(matrix);
+    };
+
+    const waveFunctionCollapse = () => {
+        const lowestEntropyCells = getLowestEntropyCells();
+
+        if (lowestEntropyCells.length === 0) return 0;
+
+        const cell = lowestEntropyCells[Math.floor(Math.random() * lowestEntropyCells.length)];
+        cell.collapse();
+
+        return 1;
+    };
+
+    const getLowestEntropyCells = () => {
+        let lowestEntropy = MAX_ENTROPY;
+        const lowestCells = [];
+
+        for (let y = 0; y < gridHeight.value; y++) {
+            for (let x = 0; x < gridWidth.value; x++) {
+                const cell = getCell.value({X: x, Y: y});
+                if (cell.entropy > 0) {
+                    if (cell.entropy < lowestEntropy) {
+                        lowestEntropy = cell.entropy;
+                        lowestCells.splice(0);
+                    }
+                    if (cell.entropy === lowestEntropy) {
+                        lowestCells.push(getCell.value({X: x, Y: y}));
+                    }
+                }
+            }
+        }
+
+        return lowestCells;
+    };
+
+    const hideMap = () => {
+        modifiedMatrixCells.value.forEach(
+            (cell) => {
+                setCellData({ ...cell, status: CELL.STATUS.HIDDEN });
+            }
+        );
     };
 
     const resetGrid = () => {
@@ -111,13 +142,16 @@ export const useGridStore = defineStore('useGridStore', () => {
 
     const unveilMap = () => {
         unmodifiedMatrixCells.value.forEach(
-            (cell) => setCellData({ ...cell, status: CELL.STATUS.DEFAULT })
+            (cell) => {
+                setCellData({ ...cell, status: CELL.STATUS.DEFAULT });
+            }
         );
     };
 
     return {
         getCell,
         gridMatrix,
+        hideMap,
         initializeGrid,
         resetGrid,
         setCellData,
