@@ -7,6 +7,7 @@
         @click="onCellClick({ ...data })"
     >
         {{ !isCellHidden ? getCellResourceToDisplay : '' }}
+        {{ props.data.entropy === 0 ? 'C' : props.data.entropy }}
     </div>
 </template>
 

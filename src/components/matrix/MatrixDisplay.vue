@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import MatrixCell from '@/components/matrix/MatrixCell.vue';
-import CELL from '@/models/constants/cell';
+import CELL from '@/models/constants/cell.const';
 import { Cell } from '@/models/types/cell.type';
 import { useGridStore } from '@/store/useGridStore';
 import { computed } from 'vue';

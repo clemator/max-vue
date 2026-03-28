@@ -1,4 +1,5 @@
-import CELL from '@/models/constants/cell';
+import CELL from '@/models/constants/cell.const';
+import { cellRules, Directions } from '@/models/constants/config.const';
 import RESOURCE from '@/models/constants/resource';
 import { Cell } from '@/models/types/cell.type';
 import initCell from '@/utils/cellConstructor';
@@ -67,7 +68,7 @@ export const useGridStore = defineStore('useGridStore', () => {
             fuelRatio,
             goldRatio,
         } = gridOptions;
-        let matrix = [];
+        let matrix: Array<Cell[]> = [];
         let matrixArray = [];
 
         setGridSize({ height, width });
@@ -91,6 +92,16 @@ export const useGridStore = defineStore('useGridStore', () => {
             matrix.push(matrixArray);
         }
 
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                const cell = matrix[y][x];
+                if (y > 0) cell.addNeighbour(Directions.NORTH, matrix[y-1][x]);
+                if (x < width - 1) cell.addNeighbour(Directions.EAST, matrix[y][x+1]);
+                if (y < height - 1) cell.addNeighbour(Directions.SOUTH, matrix[y+1][x]);
+                if (x > 0) cell.addNeighbour(Directions.WEST, matrix[y][x-1]);
+            }
+        }
+
         setGridContent(matrix);
     };
 
@@ -99,14 +110,31 @@ export const useGridStore = defineStore('useGridStore', () => {
 
         if (lowestEntropyCells.length === 0) return 0;
 
-        const cell = lowestEntropyCells[Math.floor(Math.random() * lowestEntropyCells.length)];
-        cell.collapse();
+        const cellToCollapse = lowestEntropyCells[Math.floor(Math.random() * lowestEntropyCells.length)];
+        cellToCollapse.collapse();
+
+        const stack: Cell[] = [];
+        stack.push(cellToCollapse);
+
+        while (stack.length > 0) {
+            const cell = stack.pop();
+            const cellPossibilities = cell.getPossibilities();
+            const cellDirections = cell.getDirections();
+
+            for (const direction of cellDirections) {
+                const neighbour = cell.getNeighbour(direction);
+                if (neighbour.entropy > 0) {
+                    const reduced = neighbour.constraint(cellPossibilities, direction);
+                    if (reduced === true) stack.push(neighbour);
+                }
+            }
+        }
 
         return 1;
     };
 
     const getLowestEntropyCells = () => {
-        let lowestEntropy = MAX_ENTROPY;
+        let lowestEntropy = Object.keys(cellRules).length;
         const lowestCells = [];
 
         for (let y = 0; y < gridHeight.value; y++) {
@@ -158,5 +186,6 @@ export const useGridStore = defineStore('useGridStore', () => {
         setGridContent,
         setGridSize,
         unveilMap,
+        waveFunctionCollapse,
     };
 });
