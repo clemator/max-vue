@@ -10,15 +10,15 @@
 import TopToolbar from '@/components/TopToolbar.vue';
 import MatrixDisplay from '@/components/matrix/MatrixDisplay.vue';
 import DebugTools from '@/components/matrix/DebugTools.vue';
-import CELL from '@/models/constants/cell';
+import CELL from '@/models/constants/cell.const';
 import RESOURCE from '@/models/constants/resource';
 import { useGridStore } from '@/store/useGridStore';
 import { onMounted } from 'vue';
 
 const gridStore = useGridStore();
 const gridOptions = {
-    height: 25,
-    width: 25,
+    height: 4,
+    width: 4,
     status: CELL.STATUS.HIDDEN,
     mineralRatio: RESOURCE.RATIO.MINERAL,
     fuelRatio: RESOURCE.RATIO.FUEL,

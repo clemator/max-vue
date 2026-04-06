@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "allowJs": true,
+        "lib": ["ES2023", "DOM"],
         "paths": {
             "@/*": ["./src/*"]
         }
