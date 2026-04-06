@@ -176,6 +176,10 @@ export const useGridStore = defineStore('useGridStore', () => {
         );
     };
 
+    const waveFunctionCollapseAll = () => {
+        while (waveFunctionCollapse() === 1) {};
+    };
+
     return {
         getCell,
         gridMatrix,
@@ -187,5 +191,6 @@ export const useGridStore = defineStore('useGridStore', () => {
         setGridSize,
         unveilMap,
         waveFunctionCollapse,
+        waveFunctionCollapseAll,
     };
 });

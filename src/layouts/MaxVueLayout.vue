@@ -17,8 +17,8 @@ import { onMounted } from 'vue';
 
 const gridStore = useGridStore();
 const gridOptions = {
-    height: 25,
-    width: 25,
+    height: 4,
+    width: 4,
     status: CELL.STATUS.HIDDEN,
     mineralRatio: RESOURCE.RATIO.MINERAL,
     fuelRatio: RESOURCE.RATIO.FUEL,
